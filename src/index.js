@@ -1,10 +1,12 @@
 const express = require('express');
 const Users = require('./app/models/Users');
 const mongoose = require('mongoose');
+const cors = require('cors')
 require('dotenv').config();
 const app = express();
 
 //não sei oque essa parte faz mas sem ela o app quebra
+app.use(cors());
 app.use(
     express.urlencoded({
         extended:true
@@ -35,4 +37,4 @@ console.log('conectamos ao mongodb')
 .catch((e)=>{
     console.log(e)
 })
-app.listen(3000,()=>{console.log('servidor rodando na porta 3000')})
+app.listen(8080,()=>{console.log('servidor rodando na porta 8080')})

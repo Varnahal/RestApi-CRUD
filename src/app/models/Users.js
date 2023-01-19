@@ -16,6 +16,7 @@ const User = mongoose.model('User',UsersSchema)
 
 //criar um novo usuario no banco de dados
 router.post('/',async (req,res)=>{
+    
     //pegando os dados da requisição
     const {name,email,password} = req.body
 
@@ -38,6 +39,8 @@ router.post('/',async (req,res)=>{
     try {
         //criando o usuario
         await User.create(user)
+        res.header("Access-Control-Allow-Origin", "http6://localhost:3000");
+        res.header("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
         res.status(202).json({message:"Usuario criado com sucesso"})
         console.log('deu certo')
     } catch (error) {
@@ -53,6 +56,7 @@ router.get('/',async (req,res)=>{
             res.status(422).json({message:"Nenhum usuario encontrado no banco de dados"})
             return
         }
+        res.header("Access-Control-Allow-Origin", "*");
         res.status(202).json(Users)
         console.log('deu certo')
     } catch (error) {
